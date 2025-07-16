@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.db import Base, engine
-from api import auth, hunter, logs, guardian
+from api import auth, hunter, logs, guardian, g_login
 
 # Initialize FastAPI app
 app = FastAPI(title="Septer Backend")
@@ -21,6 +21,6 @@ Base.metadata.create_all(bind=engine)
 # Register route groups
 app.include_router(guardian.router, prefix="/api/guardian", tags=["Guardian"])
 app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
-app.include_router(auth.router, prefix="/api/g-login-rntinfosec", tags=["Guardian-login"])
+app.include_router(g_login.router, prefix="/api/g-login", tags=["Guardian-login"])
 app.include_router(hunter.router, prefix="/api/hunter", tags=["Hunter"])
 app.include_router(logs.router, prefix="/api/logs", tags=["Logs"])
